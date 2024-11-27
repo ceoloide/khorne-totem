@@ -45,6 +45,76 @@ points:
       anchor:
         - ref: mcu
           shift: [0,-3.5]
+    totem_screw_1:
+      key.tags:
+        - helper
+        - totem_screw
+      anchor: 
+        - ref: matrix_c1_r1
+          shift: [0,u/2+u/6+u/16]
+    totem_screw_2:
+      key.tags:
+        - helper
+        - totem_screw
+      anchor: 
+        - ref: matrix_c1_r3
+          shift: [0,-u/2-u/6-u/16]
+    totem_screw_3:
+      key.tags:
+        - helper
+        - totem_screw
+      anchor:
+        - ref: thumbfan_c6_r0
+          shift: [0,5+u/2+u/6]
+          affect: [y]
+        - ref: mcu
+          affect: [x]
+    corne_screw_1:
+      key.tags:
+        - helper
+        - corne_screw
+      anchor: 
+        aggregate.parts:
+          - ref: matrix_c1_r1
+          - ref: matrix_c2_r1
+          - ref: matrix_c1_r2
+          - ref: matrix_c2_r2
+    corne_screw_2:
+      key.tags:
+        - helper
+        - corne_screw
+      anchor: 
+        aggregate.parts:
+          - ref: matrix_c5_r1
+          - ref: matrix_c5_r2
+          - ref: matrix_c6_r1
+          - ref: matrix_c6_r2
+    corne_screw_3:
+      key.tags:
+        - helper
+        - corne_screw
+      anchor: 
+        aggregate.parts:
+          - ref: matrix_c1_r2
+          - ref: matrix_c1_r3
+          - ref: matrix_c2_r2
+          - ref: matrix_c2_r3
+    corne_screw_4:
+      key.tags:
+        - helper
+        - corne_screw
+      anchor: 
+        aggregate.parts:
+          - ref: matrix_c3_r3
+          - ref: thumbfan_c4_r0
+    corne_screw_5:
+      key.tags:
+        - helper
+        - corne_screw
+      anchor: 
+        aggregate.parts:
+          - ref: matrix_c6_r3
+          - ref: thumbfan_c6_r0
 outlines:
   _keycaps:
     - what: rectangle
@@ -149,22 +219,11 @@ outlines:
           shift: [u/2,-u/2]
   _totem_screw_heads:
     - what: circle
-      where: matrix_c1_r1
+      where: [totem_screw]
       radius: 4.3/2
-      adjust:
-        shift: [0,u/2+u/6+u/16]
+  _corne_screw_heads:
     - what: circle
-      where: matrix_c1_r3
-      radius: 4.3/2
-      adjust:
-        shift: [0,-u/2-u/6-u/16]
-    - what: circle
-      where: 
-        - ref: thumbfan_c6_r0
-          shift: [0,5+u/2+u/6]
-          affect: [y]
-        - ref: mcu
-          affect: [x]
+      where: [corne_screw]
       radius: 4.3/2
   corne:
     - what: rectangle
@@ -298,14 +357,19 @@ outlines:
     - what: outline
       name: _mcu_cluster
       operation: stack
+    - what: outline
+      name: _corne_screw_heads
+      operation: stack
 pcbs:
   totem_pcb:
     $params: [
       __board,
+      __screws,
       __vertical_mcu_shift,
     ]
     $args: [
       "totem",
+      "totem_screw",
       u/8+u/8,
     ]
     template: kicad8
@@ -313,6 +377,12 @@ pcbs:
       board:
         outline: __board
     footprints: &baseline_footprints
+      m2_screws:
+        what: ceoloide/mounting_hole_npth
+        where: /__screws/
+        params:
+          hole_size: 4.6
+          hole_drill: 2.2
       inner_switches:
         what: ceoloide/switch_choc_v1_v2
         where:
@@ -397,6 +467,8 @@ pcbs:
         params:
           reversible: true
           invert_jumpers_position: true
+          MOSI: "DA"
+          SCK: "CL"
         adjust:
           shift: [0,__vertical_mcu_shift]
       battery_connector:
@@ -422,5 +494,6 @@ pcbs:
     $extends: pcbs.totem_pcb
     $args: [
       "corne",
+      "corne_screw",
       0,
     ]
