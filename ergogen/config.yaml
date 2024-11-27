@@ -458,7 +458,7 @@ pcbs:
           P19_label: " "
           P20_label: " "
           P21_label: " "
-          use_rectangular_jumpers: true
+          use_rectangular_jumpers: false
         adjust:
           shift: [0,__vertical_mcu_shift]
       display:
@@ -477,7 +477,7 @@ pcbs:
         params:
           reversible: true
         adjust:
-          shift: [-4,__vertical_mcu_shift - 25]
+          shift: [-6,__vertical_mcu_shift - 25]
           rotate: 90
       on_off_switch:
         what: ceoloide/power_switch_smd_side
@@ -487,7 +487,15 @@ pcbs:
           to: RAW
           reversible: true
         adjust:
-          shift: [0,__vertical_mcu_shift + u/2 - 1.75]
+          shift: [-1.5,__vertical_mcu_shift + u/2 - 1.75]
+          rotate: 90
+      reset_switch:
+        what: ceoloide/reset_switch_tht_top
+        where: display
+        params:
+          reversible: true
+        adjust:
+          shift: [6.75,__vertical_mcu_shift - 25]
           rotate: 90
 
   corne_pcb:
