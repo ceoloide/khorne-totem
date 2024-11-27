@@ -298,4 +298,129 @@ outlines:
     - what: outline
       name: _mcu_cluster
       operation: stack
-          
+pcbs:
+  totem_pcb:
+    $params: [
+      __board,
+      __vertical_mcu_shift,
+    ]
+    $args: [
+      "totem",
+      u/8+u/8,
+    ]
+    template: kicad8
+    outlines:
+      board:
+        outline: __board
+    footprints: &baseline_footprints
+      inner_switches:
+        what: ceoloide/switch_choc_v1_v2
+        where:
+          - /matrix_c[2-6]_r[0-4]/
+          - /thumbfan_c[4-5]_r0/
+        params:  &switches
+          from: "{{colrow}}"
+          to: "{{col.name}}"
+          choc_v1_support: false
+          include_plated_holes: false
+          hotswap: true
+          reversible: true
+          include_stabilizer_pad: false
+        adjust:
+          rotate: 180
+      outer_switches_left:
+        what: ceoloide/switch_choc_v1_v2
+        where:
+          - /matrix_c1_r[0-4]/
+        params: 
+          <<: *switches
+          outer_pad_width_back: 2
+        adjust:
+          rotate: 180
+      outer_switches_right:
+        what: ceoloide/switch_choc_v1_v2
+        where:
+          - thumbfan_c6_r0
+        params: 
+          <<: *switches
+          outer_pad_width_front: 2
+        adjust:
+          rotate: 180
+      diodes_f:
+        what: ceoloide/diode_tht_sod123
+        where: [key]
+        params:
+          from: "{{colrow}}"
+          to: "{{row}}"
+          side: F
+        adjust:
+          shift: [-5.7,0]
+          rotate: 0
+      diodes_b:
+        what: ceoloide/diode_tht_sod123
+        where: [key]
+        params:
+          from: "{{colrow}}"
+          to: "{{row}}"
+          side: B
+        adjust:
+          shift: [5.7,0]
+          rotate: 180
+      mcu:
+        what: ceoloide/mcu_supermini_nrf52840
+        where: mcu
+        params:
+          reversible: true
+          only_required_jumpers: true
+          P10: "r0"
+          P3: "r1"
+          P4: "r2"
+          P5: "r3"
+          P2: "c1"
+          P15: "c2"
+          P18: "c3"
+          P16: "c4"
+          P8: "c5"
+          P9: "c6"
+          P6: "DA"
+          P7: "CL"
+          P14: "CS"
+          P19_label: " "
+          P20_label: " "
+          P21_label: " "
+          use_rectangular_jumpers: true
+        adjust:
+          shift: [0,__vertical_mcu_shift]
+      display:
+        what: ceoloide/display_nice_view
+        where: display
+        params:
+          reversible: true
+          invert_jumpers_position: true
+        adjust:
+          shift: [0,__vertical_mcu_shift]
+      battery_connector:
+        what: ceoloide/battery_connector_jst_ph_2
+        where: display
+        params:
+          reversible: true
+        adjust:
+          shift: [-4,__vertical_mcu_shift - 25]
+          rotate: 90
+      on_off_switch:
+        what: ceoloide/power_switch_smd_side
+        where: matrix_c6_r1
+        params:
+          from: BAT_P
+          to: RAW
+          reversible: true
+        adjust:
+          shift: [0,__vertical_mcu_shift + u/2 - 1.75]
+          rotate: 90
+
+  corne_pcb:
+    $extends: pcbs.totem_pcb
+    $args: [
+      "corne",
+      0,
+    ]
