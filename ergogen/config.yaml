@@ -1,0 +1,301 @@
+points:
+  zones:
+    matrix:
+      key:
+        tags: 
+          - key
+      columns:
+        c1:
+        c2:
+        c3.key.stagger: u/3
+        c4.key.stagger: u/8
+        c5.key.stagger: -u/8
+        c6.key.stagger: -u/8
+      rows:
+        r3:
+        r2:
+        r1:
+    thumbfan:
+      anchor:
+        - ref: matrix_c6_r3
+          shift: [-1.5u,-u]
+      key.tags:
+        - key
+      columns:
+        c4:
+        c5.key:
+          splay: -10
+          stagger: -1.8
+          spread: u + 2
+        c6.key:
+          splay: -10
+          stagger: -1.8
+          spread: u + 2
+      rows:
+        r0:
+    mcu:
+      key.tags:
+        - helper
+      anchor:
+        - ref: matrix_c6_r1
+          shift: [u/2+18/2+1.6,u/2-33/2]
+    display:
+      key.tags:
+        - helper
+      anchor:
+        - ref: mcu
+          shift: [0,-3.5]
+outlines:
+  _keycaps:
+    - what: rectangle
+      where: [key]
+      size: 18
+      fillet: 3
+  _mcu:
+    - what: rectangle
+      where: [mcu]
+      size: [17.78,33]
+      fillet: 1
+    - what: rectangle
+      where: [mcu]
+      size: [8.94,7.35]
+      fillet: 0.1
+      operation: stack
+      adjust:
+        shift: [0,33/2-7.35/2+0.7]
+  _display:
+    - what: rectangle
+      where: [display]
+      size: [14,36]
+      fillet: 0.5
+    - what: rectangle
+      where: [display]
+      size: [12.82,2.66]
+      operation: stack
+      fillet: 0.1
+      adjust:
+        shift: [0,-16.7]
+    - what: rectangle
+      where: [display]
+      size: [10.8,24.6]
+      operation: stack
+      adjust:
+        shift: [0,-0.75]
+  _mcu_cluster:
+    - what: outline
+      name: _mcu
+      operation: stack
+    - what: outline
+      name: _display
+      operation: stack
+  _thumbfan:
+    - what: polygon
+      points:
+        - ref: thumbfan_c4_r0
+          shift: [-u/2,u/2]
+        - ref: thumbfan_c4_r0
+          shift: [-u/2,-u/2]
+        - ref: thumbfan_c4_r0
+          shift: [u/2,-u/2]
+        - ref: thumbfan_c5_r0
+          shift: [-u/2,-u/2]
+          affect: [x,y]
+        - ref: thumbfan_c5_r0
+          shift: [u/2,-u/2]
+          affect: [x,y]
+        - ref: thumbfan_c6_r0
+          shift: [-u/2,-u/2]
+          affect: [x,y]
+        - ref: thumbfan_c6_r0
+          shift: [u/2,-u/2]
+          affect: [x,y]
+        - ref: thumbfan_c6_r0
+          shift: [u/2,u/2]
+          affect: [x,y]
+        - ref: thumbfan_c6_r0
+          shift: [-u/2,u/2]
+          affect: [x,y]
+        - ref: thumbfan_c5_r0
+          shift: [u/2,u/2]
+          affect: [x,y]
+        - ref: thumbfan_c5_r0
+          shift: [-u/2,u/2]
+          affect: [x,y]
+        - ref: thumbfan_c4_r0
+          shift: [u/2,u/2]
+          affect: [x,y]
+  _keys:
+    - what: rectangle
+      where: /matrix/
+      size: u
+    - what: outline
+      name: _thumbfan
+    - what: polygon
+      points:
+        - ref: matrix_c3_r1
+          shift: [u/2,-u/2]
+        - ref: thumbfan_c4_r0
+          shift: [-u/2,u/2]
+          affect: [x]
+        - ref: thumbfan_c4_r0
+          shift: [-u/2,u/2]
+          affect: [y]
+        - ref: thumbfan_c5_r0
+          shift: [u/2,u/2]
+          affect: [x,y]
+        - ref: matrix_c6_r3
+          shift: [u/2,-u]
+        - ref: matrix_c6_r3
+          shift: [u/2,-u/2]
+  _totem_screw_heads:
+    - what: circle
+      where: matrix_c1_r1
+      radius: 4.3/2
+      adjust:
+        shift: [0,u/2+u/6+u/16]
+    - what: circle
+      where: matrix_c1_r3
+      radius: 4.3/2
+      adjust:
+        shift: [0,-u/2-u/6-u/16]
+    - what: circle
+      where: 
+        - ref: thumbfan_c6_r0
+          shift: [0,5+u/2+u/6]
+          affect: [y]
+        - ref: mcu
+          affect: [x]
+      radius: 4.3/2
+  corne:
+    - what: rectangle
+      where: [key]
+      size: u
+    - what: rectangle
+      where: [matrix_c6_r1]
+      size: [1.6,3u]
+      adjust:
+        shift: [u/2+1.6/2,-u]
+    - what: rectangle
+      where: [mcu]
+      size: [18,33]
+    - what: rectangle
+      where: [display]
+      size: [18,36]
+    - what: polygon
+      points:
+        - ref: matrix_c2_r3
+          shift: [u/2,-u/2]
+        - ref: matrix_c3_r3
+          shift: [u/2,-u/2-u/3]
+        - ref: thumbfan_c4_r0
+          shift: [-u/2,-u/2]
+          affect: [x,y]
+        - ref: thumbfan_c5_r0
+          shift: [u/2,-u/2]
+          affect: [x,y]
+        - ref: thumbfan_c6_r0
+          shift: [u/2,-u/2]
+          affect: [x,y]
+        - ref: thumbfan_c6_r0
+          shift: [u/2,u/2]
+          affect: [x,y]
+        - ref: matrix_c6_r3
+          shift: [u/2+18+1.6,-u/2]
+          affect: [x,y]
+        - ref: mcu
+          shift: [18/2,-33/2]
+        - ref: matrix_c6_r2
+          shift: [-u/2,u/2]
+          affect: [x,y]
+        - ref: matrix_c2_r2
+          shift: [u/2,u/2]
+          affect: [x,y]
+  totem:
+    - what: rectangle
+      where: matrix_c4_r1
+      adjust:
+        shift: [-0.5u,-u]
+      size: [6u,3u]
+    - what: rectangle
+      where: [matrix_c4_r1]
+      size: [1.6,3u]
+      adjust:
+        shift: [2u+u/2+1.6/2,-u]
+    - what: rectangle
+      where: matrix_c1_r3
+      adjust:
+        shift: [2.5u,u]
+      size: [6u,3u]
+    - what: rectangle
+      where: matrix_c1_r3
+      size: [4u,u/3+u/8]
+      adjust:
+        shift: [1.5u,-u/2-u/6-u/16]
+    - what: rectangle
+      where: [mcu]
+      size: [18,33]
+      adjust:
+        shift: [0,u/4]
+    - what: rectangle
+      where: [display]
+      size: [18,36]
+      adjust:
+        shift: [0,u/4]
+    - what: outline
+      name: _thumbfan
+    - what: rectangle
+      where: [matrix_c6_r1]
+      size: [1.6,3u]
+      adjust:
+        shift: [u/2+1.6/2,-u]
+    - what: polygon
+      points:
+        - ref: thumbfan_c4_r0
+          shift: [-u/2,u/2]
+        - ref: thumbfan_c4_r0
+          shift: [u/2,u/2]
+        - ref: thumbfan_c5_r0
+          shift: [-u/2,u/2]
+          affect: [x,y]
+        - ref: thumbfan_c5_r0
+          shift: [u/2,u/2]
+          affect: [x,y]
+        - ref: thumbfan_c6_r0
+          shift: [-u/2,u/2]
+          affect: [x,y]
+        - ref: thumbfan_c6_r0
+          shift: [u/2,u/2]
+          affect: [x,y]
+        - ref: matrix_c1_r3
+          shift: [5u+u/2+1.6+18,-u/2]
+        - ref: matrix_c1_r2
+          shift: [5u+u/2+1.6+18,u/2]
+        - ref: thumbfan_c4_r0
+          shift: [-u/2,2u]
+  totem_preview:
+    - what: outline
+      name: totem
+    - what: outline
+      name: _keycaps
+      operation: stack
+    - what: outline
+      name: _mcu_cluster
+      adjust:
+        shift: [0,u/8+u/8]
+      operation: stack
+    - what: outline
+      name: _keys
+      operation: stack
+    - what: outline
+      name: _totem_screw_heads
+      operation: stack
+  corne_preview:
+    - what: outline
+      name: corne
+    - what: outline
+      name: _keycaps
+      operation: stack
+    - what: outline
+      name: _mcu_cluster
+      operation: stack
+          
