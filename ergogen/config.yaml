@@ -1,6 +1,8 @@
 points:
   zones:
     matrix:
+      anchor:
+        shift: [150, -150] # Fix KiCad placement
       key:
         tags: 
           - key
